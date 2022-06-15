@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_stock_picking_operation" inherit_id="stock.report_picking">
+        <xpath expr="//div[@class='row justify-content-end mb16']" position="replace">
+            <div class="row">
+                <div class="col-4"/>
+                <div class="col-4"/>
+                <div class="col-4" name="right_box">
+                    <b>Picking</b>
+                    <div t-esc="o.name"
+                         t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;'}"/>
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-4"/>
+                <div class="col-4"/>
+                <div class="col-4" name="right_box">
+                    <b>Shipping</b>
+                    <t t-foreach="o.sale_id.picking_ids" t-as="pick">
+                        <t t-if="'OUT' in pick.name">
+                            <div t-esc="pick.name"
+                                 t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;'}"/>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
